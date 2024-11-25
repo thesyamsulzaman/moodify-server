@@ -30,8 +30,7 @@ const fetchAccessToken = async (code) => {
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to   
- fetch access token: ${response.statusText}`);
+    throw new Error(`Failed to fetch access token: ${response.statusText}`);
   }
 
   const accessTokenData: any = await response.json();
