@@ -2,8 +2,6 @@ name: Moodify CI
 on:
   push:
     branches: [master]
-  pull:
-    branches: [master]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,4 +12,4 @@ jobs:
         with:
           node-version: "18"
       - run: npm install
-      - run: npm run build --prefix client
+      - run: npm start
