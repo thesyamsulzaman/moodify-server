@@ -46,6 +46,8 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
+      - name: Generating Prisma Client
+        run: npx prisma generate
       - name: Deploying Database
         run: npx prisma migrate deploy
       - name: Run Tests
