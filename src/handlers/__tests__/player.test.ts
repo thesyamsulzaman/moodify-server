@@ -1,5 +1,3 @@
-import * as player from "../player";
-import { prismaMock } from "../../../mock";
 import request from "supertest";
 import app from "../../index";
 import prisma from "../../db";
