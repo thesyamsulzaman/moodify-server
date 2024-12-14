@@ -58,16 +58,18 @@ app.use((err, req, res, next) => {
   }
 });
 
-https
-  .createServer(
-    {
-      key: readFileSync(path.join(__dirname, "key.pem"), "utf-8"),
-      cert: readFileSync(path.join(__dirname, "cert.pem"), "utf-8"),
-    },
-    app
-  )
-  .listen(config.port, () => {
-    console.log(`[Server] Listening to port ${config.port}`);
-  });
+if (process.env.NODE_ENV !== "test") {
+  https
+    .createServer(
+      {
+        key: readFileSync(path.join(__dirname, "key.pem"), "utf-8"),
+        cert: readFileSync(path.join(__dirname, "cert.pem"), "utf-8"),
+      },
+      app
+    )
+    .listen(config.port, () => {
+      console.log(`[Server] Listening to port ${config.port}`);
+    });
+}
 
 export default app;
