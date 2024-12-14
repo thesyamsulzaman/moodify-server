@@ -15,7 +15,6 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-
     # Service containers to run with `container-job`
     services:
       # Label used to access the service container
@@ -37,11 +36,15 @@ jobs:
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/moodify
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
-      - run: npx prisma migrate deploy
-      - run: pnpm test
+      - name: Deploying Database
+        run: npx prisma migrate deploy
+      - name: Run Tests
+        run: pnpm test
